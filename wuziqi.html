@@ -1,0 +1,404 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>五子棋</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/index.js"></script>
+</head>
+<style>
+*{
+  margin:0;
+  padding:0;
+}
+body{
+  overflow: hidden;
+}
+    #canvas{
+      border:3px solid #895f57;
+      display: block;
+      margin:20px auto;
+      box-shadow: 5px 5px 20px #86421b;
+    }
+    .left-img{
+      position: absolute;
+      right:80px;
+      top:320px;
+      width:220px;
+      height:198px;
+      background:url(./img/a.png);
+      border-radius: 50%;
+    }
+    .zhechou{
+      width:220px;
+      height:220px;
+      position: absolute;
+      right:146px;
+      top:30px;
+      border-radius: 50%;
+      border:32px solid rgba(245,235,213,1);
+      box-sizing:border-box;
+    }
+    .zhechou1{
+      width:220px;
+      height:220px;
+      position: absolute;
+      right:146px;
+      top:330px;
+      border-radius: 50%;
+      border:32px solid rgba(245,235,213,1);
+      box-sizing:border-box;
+    }
+    .right-img{
+      position: absolute;
+      right:80px;
+      top:20px;
+      width:220px;
+      height:198px;
+      background:url(./img/a.png);
+       border-radius: 50%;
+    }
+    .canvas1{
+      position:absolute;
+      right:90px;
+      top:320px;
+      z-index: 200;
+     /* display: none;*/
+    }
+     .canvas2{
+      position:absolute;
+      right:90px;
+      top:20px;
+      z-index: 200;
+     /* display: none;*/
+    }
+    .bg{
+       width:100%;
+       position: absolute;
+       left:0;
+       top:0;
+       z-index: -10;
+    }
+    .zi{
+      width:200px;
+      height:30px;
+      position: absolute;
+      left:50px;
+      top:240px;
+      /*background:red;*/
+      text-align: center;
+      font-size: 36px;
+      color:#fff;
+    }
+    .zi1{
+      width:200px;
+      height:30px;
+      position: absolute;
+      right:50px;
+      top:240px;
+      /*background:red;*/
+      text-align: center;
+      font-size: 36px;
+      color:#fff;
+    }
+    .bg{
+      position:fixed;
+      left:0;
+      right:0;
+      top:0;
+      bottom:0;
+      width:100%;
+      z-index:-10;
+      background:#f1ead9 url(./img/bg.jpg) no-repeat center center;
+    }
+    .zhuti{
+      width:1300px;
+      height:768px;
+      position: relative;
+    }
+    .start{
+      width:420px;
+      height:125px;
+      background:url(./img/S_03.png);
+      background-size:cover;
+      position: absolute;
+      left:50%;
+      margin-left:-265px;
+      top:50%;
+      margin-top:-80px;
+      z-index: 100;
+      display: none;
+      transition:0.8s all  ease;
+    }
+    .biaoti{
+      position: absolute;
+      left: 20px;
+      top:25px;
+      background:url(./img/d.png);
+      background-size:cover;
+      z-index: 100;
+      width:300px;
+      height:147px;
+    }
+    .xuanxiang{
+      width:320px;
+      height:400px;
+      position: absolute;
+      left:10px;
+      top:180px;
+      z-index: 100;
+    }
+    .xuanxiang img{
+      width:160px;
+      float: left;
+      margin-left:160px;
+      transition:0.3s all ease;
+      cursor: pointer;
+    }
+    .xuanxiang img:first-child{
+      margin-left:20px;
+    }
+    .xuanxiang img:nth-child(3){
+      margin-left:80px;
+    }
+    .user1{
+      width:380px;
+      height:300px;
+      position: absolute;
+      right:20px;
+      top:20px;
+      background:rgba(245,235,213,0.4);
+      border:5px solid #a95843;
+      box-sizing:border-box;
+      border-radius: 10px;
+      z-index: 20;
+    }
+    .touxiang{
+      width:100px;
+      height:100px;
+      float: right;
+      margin-right:5px;
+      margin-top: 5px;
+      border-radius: 50%;
+      border:3px solid #86502a;
+      background:#9f9c98;
+    }
+    .user2{
+      width:380px;
+      height:300px;
+      position: absolute;
+      right:20px;
+      top:325px;
+      background:rgba(245,235,213,0.4);
+      border:5px solid #a95843;
+      box-sizing:border-box;
+      border-radius: 10px;
+      z-index: 20;
+    }
+    .user1 .name{
+      width:100px;
+      height:45px;
+      background:url(./img/hei.png);
+      background-size:cover;
+      float: left;
+    }
+    .user2 .name{
+      width:100px;
+      height:45px;
+      background:url(./img/bai.png);
+      background-size:cover;
+      float: left;
+    }
+
+    .set,.set1{
+      width:400px;
+      height:460px;
+      background:rgba(245,235,213,0.8);
+      border:5px solid #a95843;
+      box-sizing:border-box;
+      border-radius: 10px;
+      position: absolute;
+      left:50%;
+      top:50%;
+      margin-left:-240px;
+      margin-top:-250px;
+      display: none;
+    }
+    .set1{
+      z-index: 200;
+      overflow: hidden;
+      display: none;
+    }
+    .set img{
+      cursor: pointer;
+    }
+    .set1 #yxsm{
+      margin-left:50px;
+    }
+    .kaishi{
+      width:420px;
+      height:125px;
+      position: absolute;
+      left:50%;
+      margin-left:-210px;
+      top:50%;
+      margin-top:-60px;
+      background:url(./img/kaishi.png);
+      background-size:cover;
+      visibility: hidden;
+    }
+    .kaishi img{
+     margin-top:20px;
+
+    }
+    #active{
+      animation:active 0.8s forwards;
+      transition:0.5s all linear;
+    }
+    @keyframes active{
+      from{
+        visibility: hidden;
+      }
+      to{
+        visibility: visible;
+      }
+    }
+    .head{
+      width:100%;
+      height:100px;
+      border-bottom:3px solid #736959;
+    }
+    .head img:first-child{
+      height:60px;
+      float: left;
+      margin-left:100px;
+      margin-top:20px;
+    }
+    .head img:last-child{
+      width:50px;
+      float: right;
+      margin-top:20px;
+    }
+    .set .body{
+      width:300px;
+      height:200px;
+      background:#e6dac0;
+      border-radius: 10px;
+      margin:20px auto;
+      box-shadow: 2px 2px 3px #ded1b7;
+    }
+    .set1 .body{
+      width:400px;
+      height:400px;
+      background:url(./img/gz1.png) no-repeat center;
+      background-size:contain;
+    }
+    .line1{
+      width:100%;
+      height:100px;
+    }
+    .bgyy{
+      width:150px;
+      float: left;
+      margin-top:20px;
+    }
+    .col{
+      width:120px;
+      height:36px;
+      background:url(./img/an.png);
+      background-size:cover;
+      float: right;
+      margin-top:20px;
+      cursor: pointer;
+    }
+    #huantu{
+      background:url(./img/an1.png);
+       background-size:cover;
+    }
+    .bottom{
+      width:100%;
+      height:100px;
+      background:#f5ebd5;
+    }
+    .sm{
+      width:150px;
+      float: left;
+      margin-top:30px;
+      margin-left:40px;
+    }
+    .jt{
+      width:50px;
+      float: right;
+      margin-top:30px;
+      margin-right:40px;
+    }
+    .user1 .shijian{
+      width:380px;
+      height:50px;
+      background:url(./img/d_03.png) no-repeat;
+      background-size:auto;
+      margin-top:230px;
+      margin-left:40px;
+    }
+</style>
+<body>
+     <div class="bg"></div>
+     <div class="zhuti">
+        <canvas class="canvas1" width="200px" height="200px"></canvas>
+        <canvas class="canvas2" width="200px" height="200px"></canvas>
+        <canvas id="canvas" width="600px" height="600px"></canvas>
+        <div class="left-img"></div>
+        <div class="right-img"></div>
+     </div>
+     <div class="start"></div>
+     <div class="kaishi">
+       <img src="./img/dy.png" alt="">
+     </div>
+     <div class="biaoti"></div>
+     <div class="xuanxiang">
+       <img src="./img/d_09.png" alt="">
+       <img src="./img/d_13.png" alt="">
+       <img src="./img/d_15.png" alt="">
+     </div>
+     <div class="user1">
+        <div class="name"></div>
+       <div class="touxiang"></div>
+       <div class="shijian"></div>
+     </div>
+      <div class="user2">
+         <div class="name"></div>
+         <div class="touxiang"></div>
+      </div>
+    <audio src="drop.mp3"></audio>
+    <div class="set">
+      <div class="head">
+        <img src="./img/set1.png" alt="">
+        <img src="./img/cha.png" alt="" class="cha">
+      </div>
+      <div class="body">
+        <div class="line1">
+          <img src="./img/bgyy.png" alt="" class="bgyy">
+          <div class="col col1"></div>
+        </div>
+        <div class="line1">
+          <img src="./img/yx.png" alt="" class="bgyy">
+          <div class="col col2"></div>
+        </div>
+      </div>
+      <div class="bottom">
+        <img src="./img/sm.png" alt="" class="sm">
+        <img src="./img/jt.png" alt="" class="jt">
+      </div>
+    </div>
+     <div class="set1">
+      <div class="head">
+        <img src="./img/yxsm.png" alt="" id="yxsm">
+        <img src="./img/cha.png" alt="" class="cha">
+      </div>
+      <div class="body">
+      </div>
+    </div>
+    <div class="zhechou"></div>
+    <div class="zhechou1"></div>
+</body>
+</html>
