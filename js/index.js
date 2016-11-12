@@ -88,6 +88,10 @@
       }
       if(flag){
         luozi(x,y,"black",2);
+        if(panduan(x,y,"black")>=5){
+         console.log("黑棋赢") ;
+         $(canvas).off("click");
+        }
         right=0;
         t=setInterval(render,1000);
         clearInterval(t1);
@@ -95,6 +99,10 @@
         
       }else{
           luozi(x,y,"white",1);
+          if(panduan(x,y,"white")>=5){
+          console.log("白棋赢") ;
+          $(canvas).off("click");
+        }
           left=0;
           t1=setInterval(render1,1000);
           clearInterval(t);
@@ -104,8 +112,58 @@
       }
       flag=!flag;
       audio.play();
-      panduan(chess,x,y);
     })
+
+      //判断输赢
+function M(a,b){
+  return a+'_'+b;
+}
+
+function panduan(x,y,color){
+  var row=1;col=1;zx=1;yx=1;
+  var i;
+  i=1;
+  while(qizi[M(x+i,y)]==color){
+    i++;
+    row++;
+  }
+  i=1;
+   while(qizi[M(x-i,y)]==color){
+    i++;
+    row++;
+  }
+   i=1;
+  while(qizi[M(x,y+i)]==color){
+    i++;
+    col++;
+  }
+  i=1;
+   while(qizi[M(x,y-i)]==color){
+    i++;
+    col++;
+  }
+   i=1;
+  while(qizi[M(x+i,y+i)]==color){
+    i++;
+    zx++;
+  }
+  i=1;
+   while(qizi[M(x-i,y-i)]==color){
+    i++;
+    zx++;
+  }
+    i=1;
+  while(qizi[M(x+i,y-i)]==color){
+    i++;
+    yx++;
+  }
+  i=1;
+   while(qizi[M(x-i,y+i)]==color){
+    i++;
+    yx++;
+  }
+return Math.max(row,col,zx,yx); 
+}
       //左边
     var left=0;
     function zuo(){
@@ -151,87 +209,6 @@
     function render1(){
       you();
     }
-//判断输赢
-var chessData = new Array(15);
-for (var x = 0; x < 15; x++) { 
-  chessData[x] = new Array(15); 
-  for (var y = 0; y < 15; y++) { 
-  chessData[x][y] = 0; 
-  } 
-} 
-function panduan(color,x,y){
-  var count1 = 0; 
-  var count2 = 0; 
-  var count3 = 0; 
-  var count4 = 0; 
-  //左右判断
-  for (var i = x; i >= 0; i--) { 
-    if (chessData [y] != chess) { 
-    break; 
-    } 
-    count1++; 
-  } 
-    for (var i = x + 1; i < 15; i++) { 
-    if (chessData 
-    [y] != chess) { 
-    break; 
-    } 
-    count1++; 
- } 
-    //上下判断 
-for (var i = y; i >= 0; i--) { 
-  if (chessData[x] != chess) { 
-  break; 
-  } 
-count2++; 
-} 
-for (var i = y + 1; i < 15; i++) { 
-  if (chessData[x] 
-  != chess) { 
-  break; 
-  } 
-count2++; 
-} 
-//左上右下判断 
-for (var i = x, j = y; i >= 0, j >= 0; i--, j--) { 
-  if (chessData 
-  [j] != chess) { 
-  break; 
-  } 
-count3++; 
-} 
-for (var i = x + 1, j = y + 1; i < 15, j < 15; i++, j++) { 
-  if (chessData 
-  [j] != chess) { 
-  break; 
-  } 
-count3++; 
-} 
-//右上左下判断 
-for (var i = x, j = y; i >= 0, j < 15; i--, j++) { 
-  if (chessData 
-  [j] != chess) { 
-  break; 
-  } 
-count4++; 
-} 
-for (var i = x + 1, j = y - 1; i < 15, j >= 0; i++, j--) { 
-  if (chessData 
-  [j] != chess) { 
-  break; 
-  } 
-count4++; 
-} 
-if (count1 >= 5 || count2 >= 5 || count3 >= 5 || count4 >= 5) { 
-  if (chess == 1) { 
-  alert("白棋赢了"); 
-  } 
-  else { 
-  alert("黑棋赢了"); 
-  } 
-  over = true;//设置该局棋盘已经赢了，不可以再走了 
- } 
-} 
 //选项
 $(".xuanxiang img").hover(function(){
    var index=$(this).index();
