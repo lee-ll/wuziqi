@@ -12,18 +12,47 @@
   padding:0;
 }
 body{
-  overflow: hidden;
+/*  overflow: hidden;*/
 }
     #canvas{
-      border:3px solid #895f57;
+      border:2px solid #895f57;
       display: block;
-      margin:20px auto;
-      box-shadow: 5px 5px 20px #86421b;
+      position: absolute;
+      left:50%;
+      margin-left:-300px;
+      top:20px;
+      box-sizing:border-box;
+      box-shadow: 0px 0px 20px #86421b;
+    }
+    .box{
+      position: relative;
+      left:50%;
+      margin-left:-298px;
+      top:22px;
+      z-index: 200;
+      box-shadow: 0px 0px 0px  1000px rgba(0,0,0,0.3);
+      width:600px;
+      height:600px;
+      box-sizing:border-box;
+      display: none;
+    }
+
+    .box img{
+      width:100%;
+    }
+    .box a{
+      width:100%;
+      height:100%;
+      display: block;
+      position: absolute;
+      left:50%;
+      margin-left:-300px;
+      top:20px;
     }
     .left-img{
       position: absolute;
-      right:80px;
-      top:320px;
+      right:120px;
+      top:380px;
       width:220px;
       height:198px;
       background:url(./img/a.png);
@@ -33,7 +62,7 @@ body{
       width:220px;
       height:220px;
       position: absolute;
-      right:146px;
+      right:120px;
       top:30px;
       border-radius: 50%;
       border:32px solid rgba(245,235,213,1);
@@ -43,16 +72,16 @@ body{
       width:220px;
       height:220px;
       position: absolute;
-      right:146px;
-      top:330px;
+      right:120px;
+      top:370px;
       border-radius: 50%;
       border:32px solid rgba(245,235,213,1);
       box-sizing:border-box;
     }
     .right-img{
       position: absolute;
-      right:80px;
-      top:20px;
+      right:120px;
+      top:40px;
       width:220px;
       height:198px;
       background:url(./img/a.png);
@@ -60,17 +89,15 @@ body{
     }
     .canvas1{
       position:absolute;
-      right:90px;
-      top:320px;
+      right:130px;
+      top:380px;
       z-index: 200;
-     /* display: none;*/
     }
      .canvas2{
       position:absolute;
-      right:90px;
-      top:20px;
+      right:130px;
+      top:40px;
       z-index: 200;
-     /* display: none;*/
     }
     .bg{
        width:100%;
@@ -85,7 +112,6 @@ body{
       position: absolute;
       left:50px;
       top:240px;
-      /*background:red;*/
       text-align: center;
       font-size: 36px;
       color:#fff;
@@ -96,7 +122,6 @@ body{
       position: absolute;
       right:50px;
       top:240px;
-      /*background:red;*/
       text-align: center;
       font-size: 36px;
       color:#fff;
@@ -112,8 +137,13 @@ body{
       background:#f1ead9 url(./img/bg.jpg) no-repeat center center;
     }
     .zhuti{
-      width:1300px;
-      height:768px;
+      width:100%;
+      height:auto;
+      left:0;
+      right:0;
+      top:0;
+      bottom:0;
+      margin:auto;
       position: relative;
     }
     .start{
@@ -159,11 +189,11 @@ body{
       margin-left:20px;
     }
     .xuanxiang img:nth-child(3){
-      margin-left:80px;
+      margin-left:20px;
     }
     .user1{
-      width:380px;
-      height:300px;
+      width:330px;
+      height:260px;
       position: absolute;
       right:20px;
       top:20px;
@@ -172,6 +202,14 @@ body{
       box-sizing:border-box;
       border-radius: 10px;
       z-index: 20;
+    }
+    .user1 .touxiang{
+      background: url(img/1.jpg) no-repeat 0 0;
+      background-size:100% auto; 
+    }
+    .user2 .touxiang{
+      background: url(img/2.jpg) no-repeat 0 0;
+      background-size:100% auto; 
     }
     .touxiang{
       width:100px;
@@ -184,11 +222,11 @@ body{
       background:#9f9c98;
     }
     .user2{
-      width:380px;
-      height:300px;
+      width:330px;
+      height:260px;
       position: absolute;
       right:20px;
-      top:325px;
+      top:365px;
       background:rgba(245,235,213,0.4);
       border:5px solid #a95843;
       box-sizing:border-box;
@@ -305,11 +343,13 @@ body{
     .col{
       width:120px;
       height:36px;
-      background:url(./img/an.png);
-      background-size:cover;
       float: right;
       margin-top:20px;
       cursor: pointer;
+    }
+    .col1{
+      background:url(./img/an.png);
+      background-size:cover;
     }
     #huantu{
       background:url(./img/an1.png);
@@ -340,6 +380,82 @@ body{
       margin-top:230px;
       margin-left:40px;
     }
+    .yin{
+      width:400px;
+      height:300px;
+      transition:0.8s all ease;
+      transform:translate3d(0,-1000px,0);
+      position: absolute;
+      left:50%;
+      margin-left:-200px;
+      top:50%;
+      margin-top:-150px;
+      z-index: 250;
+    }
+    #win{
+      transform:translate3d(0,0,0);
+    }
+    .heiwin{
+       background:url(./img/heiy.png) no-repeat center;
+       background-size:contain;
+    }
+    .baiwin{
+       background:url(./img/baiy.png) no-repeat center;
+       background-size:contain;
+    }
+    .win-box{
+      width:100%;
+      height:100%;
+      position: relative;
+    }
+    .chongwan{
+      width:120px;
+      height:50px;
+     /* background:red;*/
+      position: absolute;
+      right:30px;
+      bottom:30px;
+      cursor: pointer;
+    }
+    .tuichu{
+    	width:40px;
+    	height:40px;
+    	position: absolute;
+    	right:20px;
+    	top:50px;
+    	cursor: pointer;
+    	/*background:red;*/
+    }
+    .manual{
+      width:200px;
+      height:60px;
+      background:url(img/scqp.png) no-repeat 0 0;
+      background-size: 100% auto;
+      position: absolute;
+      right: 120px;
+      top:305px;
+      /*bottom: 0;*/
+      margin: auto;
+    }
+    .box .guan{
+       width:40px;
+       height:40px;
+       position: absolute;
+       right:-20px;
+       top:-20px;
+       background:url(img/fork.png) no-repeat 0 0;
+       background-size: 100% auto;
+    }
+    .buxiang{
+    	position: absolute;
+    	width:200px;
+    	height:60px;
+    	left:200px;
+    	bottom:-40px;
+    	background:url(img/tuichu.png) no-repeat 0 0;
+        background-size: 100% auto;
+        cursor: pointer;
+    }
 </style>
 <body>
      <div class="bg"></div>
@@ -356,20 +472,21 @@ body{
      </div>
      <div class="biaoti"></div>
      <div class="xuanxiang">
-       <img src="./img/d_09.png" alt="">
-       <img src="./img/d_13.png" alt="">
+       <img src="./img/d_07.png" alt="" class="renji">
+       <img src="./img/d_09.png" alt="" class="renren">
        <img src="./img/d_15.png" alt="">
      </div>
      <div class="user1">
         <div class="name"></div>
        <div class="touxiang"></div>
-       <div class="shijian"></div>
+       <!-- <div class="shijian"></div> -->
      </div>
       <div class="user2">
          <div class="name"></div>
          <div class="touxiang"></div>
       </div>
-    <audio src="drop.mp3"></audio>
+    <audio src="drop.mp3" id="ac"></audio>
+    <audio src="纯音乐 - 柔美古筝曲.mp3" id="ad"></audio>
     <div class="set">
       <div class="head">
         <img src="./img/set1.png" alt="">
@@ -377,12 +494,12 @@ body{
       </div>
       <div class="body">
         <div class="line1">
-          <img src="./img/bgyy.png" alt="" class="bgyy">
-          <div class="col col1"></div>
+          <img src="./img/bgyy.png" alt="" class="bgyy" >
+          <div class="col col1"  ></div>
         </div>
         <div class="line1">
           <img src="./img/yx.png" alt="" class="bgyy">
-          <div class="col col2"></div>
+          <div class="col col2" id="huantu"></div>
         </div>
       </div>
       <div class="bottom">
@@ -400,5 +517,22 @@ body{
     </div>
     <div class="zhechou"></div>
     <div class="zhechou1"></div>
+    <div class="box">
+      <div class="guan"></div>
+    </div>
+    <div class="heiwin yin">
+     <div class="win-box">
+        <div class="chongwan"></div>
+        <div class="tuichu"></div>
+      </div>
+    </div>
+    <div class="baiwin yin">
+      <div class="win-box">
+        <div class="chongwan"></div>
+        <div class="tuichu"></div>
+      </div>
+    </div>
+    <div class="manual"></div>
+    <div class="buxiang"></div>
 </body>
 </html>
