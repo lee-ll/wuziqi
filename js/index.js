@@ -201,7 +201,7 @@
  $(".buxiang").on("click",function(){
   chongwan();
   ai=false;
-  $(".start").show();
+  $(".start").hide();
  })
  //生成棋谱
  $('.manual').on("click",function(){
